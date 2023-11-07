@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h1>관리자페이지</h1>
+    <h2>이거 걍 실험용임</h2>
+    <button id="myButton4">취소</button>
+    <button id="myButton5">승인</button>
+    <a href = "/logout">Log out</a>
+    <button onclick="sendUsername()">예약페이지로 돌아가기</button >
+<script>
+    var button2 = document.getElementById("myButton4");
+    var button3 = document.getElementById("myButton5");
+    // Socket.io 클라이언트 초기화 -> 흠 이거 리셋때문에 만든건가 -> 정확한 이유는 모름
+    const socket = io();
+    // 예약 요청 보내기
+    function cancelReservation(year, month, date, time, space) {
+        const cancelData = [year, month, date, time, space];
+        socket.emit('cancelReservation', cancelData);
+    }
+    function approveReservation(year, month, date, time, space, phone_num) {
+        const approveData = [year, month, date, time, space, phone_num];
+        socket.emit('approveReservation', approveData);
+    }
+    
+    // 예약 관련 이벤트 핸들러 등록
+    socket.on('cancelReserve2', (data) => {
+    // 서버로부터의 예약 관련 데이터 수신
+        console.log('예약 취소');
+    // 예약 데이터를 화면에 표시하거나 처리합니다.
+    });
+     //번호로 구별할거임 요청
+    socket.on('approveReserve2', (data) => {
+    // 서버로부터의 예약 관련 데이터 수신
+        console.log('예약 확정');
+        window.alert(data.space1);
+    // 예약 데이터를 화면에 표시하거나 처리합니다.
+    });
+    button2.addEventListener("click", function() {
+            cancelReservation("2023","9","27", "2", "1","k5911839@gmail.com");
+        });
+    button3.addEventListener("click", function() {
+            approveReservation("2023","9","27", "2", "1","01082768110"); //이거 내 번호로 되어있음 예시가
+        });
+    function sendUsername() {
+    const url = `/reserve?userid=${encodeURIComponent("12345")}`;
+    window.location.href = url; // URL로 이동
+    }    
+</script>    
+</body>
+</html>

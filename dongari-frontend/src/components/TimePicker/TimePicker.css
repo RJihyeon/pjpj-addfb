@@ -1,0 +1,27 @@
+/* TimePicker.css */
+
+.timePicker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 600px; /* Set the maximum width to fit 5 buttons in one line */
+  margin: 0 auto; /* Center the container on the page */
+}
+
+.timePicker button {
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1; /* Distribute available space equally among the buttons */
+  max-width: 100px; /* Set a maximum width for individual buttons */
+  text-align: center;
+}
+
+.timePicker button.clicked {
+  background-color: #da6fba;
+}
