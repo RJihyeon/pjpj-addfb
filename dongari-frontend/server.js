@@ -63,7 +63,7 @@ router.route('/').get(
         }
         else {
             console.log('세션없음');
-            res.sendFile( path.join(__dirname, '/build/index.html'))
+            res.sendFile( path.join(__dirname, '/build/login.html'))
         }
     }
 );
