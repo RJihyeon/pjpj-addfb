@@ -52,7 +52,7 @@ router.post('/login', (req, res) => {
     // 모듈을 활용하여 DB로부터 로그인 정보가 올바른지 확인
     auth_functions.authenticateUser(id, password, (err, results) => {
         // 로그인 성공 시 세션에 DB에 있는 pw를 제외한 모든 정보 저장. 추후 꺼내 쓰도록 하자.
-        if (results != null) {
+        if (!results) {
             const userId = results.id;
             const phone_num = results.phone_num;
             const student_id = results.student_id;
