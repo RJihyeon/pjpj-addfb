@@ -27,7 +27,7 @@ function SignupComponent() {
   const [affiliation, setAffiliation] = useState("");
   const [division, setDivision] = useState("");
 
-  //서버에 코드 보내기
+  //서버에 보내기
   const register = () => {
     axios
       .post("/signup", {

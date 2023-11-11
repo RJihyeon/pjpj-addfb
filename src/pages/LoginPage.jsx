@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import RegisterComponent from "../components/LoginComponent/LoginComponent";
+import NavComponent from "../components/NavComponent/NavComponent";
 
 function LoginPage() {
   const [isChecked, setIsChecked] = useState(false);
@@ -31,7 +32,7 @@ function LoginPage() {
   };
   return (
     <div>
-      <HeaderComponent headerText="로그인" bannerText="로그인" />
+      <NavComponent headerText="로그인" bannerText="로그인" />
       <RegisterComponent />
       <FooterComponent />
     </div>
