@@ -5,6 +5,7 @@ import FooterComponent from "../../components/FooterComponent/FooterComponent";
 import TimePicker from "../../components/TimePicker/TimePicker";
 import DropdownMenu from "../../components/DropdownMenu/DropdownMenu";
 import "./BookingPage.css";
+import NavComponent from "../../components/NavComponent/NavComponent";
 
 function BookingPage() {
   const [isPopupVisible, setPopupVisible] = useState(false);
@@ -21,7 +22,7 @@ function BookingPage() {
 
   return (
     <div>
-      <HeaderComponent headerText="시설대관" bannerText="시설대관" />
+      <NavComponent headerText="시설대관" bannerText="시설대관" />
       <h1>날짜를 고르세요</h1>
       <DateTimePicker />
       <h1>시간을 고르세요</h1>

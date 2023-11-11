@@ -1,12 +1,13 @@
 import HeaderComponent from "../components/HeadComponent/HeadComponent";
 import InfoComponent from "../components/InfoComponent/InfoComponent";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
+import NavComponent from "../components/NavComponent/NavComponent";
 
 
 function MyPage() {
   return (
     <div>
-      <HeaderComponent headerText="마이페이지" bannerText="마이페이지" />
+      <NavComponent headerText="마이페이지" bannerText="마이페이지" />
       <InfoComponent />
       
       <FooterComponent/>

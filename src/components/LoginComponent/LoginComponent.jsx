@@ -40,7 +40,7 @@ function RegisterComponent() {
   };
   return (
     <div>
-      <div className="container">
+      <div className="login-container">
         <div className="login-box">
           <p className="login">로그인</p>
           <p className="info">가입하신 아이디와 패스워드를 입력해주세요</p>

@@ -1,63 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
-body {
-  font-family: "Inter", sans-serif;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #1c1c1c;
-  color: #fff;
-  padding: 10px;
-  height: 3vh; /*화면 3%차지 */
-}
-
-.logo {
-  max-width: 100%; /* 최대 너비도 80%로 설정 */
-  height: 120%;
-  margin-right: 20px;
-  margin-left: 30px;
-}
-
-.login-container {
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
-}
-
-.person {
-  width: 20px;
-  height: auto;
-  margin-right: 10px;
-}
-
-.loginLink {
-  font-weight: bold;
-  background-color: transparent;
-  border: none;
-  color: white;
-  padding-left: 0px;
-  font-family: "Inter";
-}
-
-.myInfo {
-  background: transparent;
-  border: none;
-  margin-right: 0px;
-  padding-right: 0px;
-}
 
 /*navigation*/
-.navigation {
+.nav-navigation {
   position: relative; /* 상대적 위치 설정 */
   margin-bottom: 0px;
   padding-bottom: 0px;
   height: 20vh;
 }
 
-.banner {
+.nav-banner {
   width: 100%;
   height: 20vh;
   object-fit: cover;
@@ -65,7 +17,7 @@ body {
   padding: 0; /* padding 속성도 추가해서 모든 패딩을 0으로 설정 */
 }
 
-.banner-text {
+.nav-banner-text {
   position: absolute; /* 절대 위치 설정 */
   top: 50%; /* 세로 중앙 정렬 */
   left: 50%; /* 가로 중앙 정렬 */
