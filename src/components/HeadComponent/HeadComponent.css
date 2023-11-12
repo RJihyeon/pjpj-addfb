@@ -98,6 +98,14 @@ body {
   margin-right: 10px;
 }
 
+.header-myreserv {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
 .header-logout:hover {
   color: #838383 /* 원하는 호버 시 색상 */;
 }

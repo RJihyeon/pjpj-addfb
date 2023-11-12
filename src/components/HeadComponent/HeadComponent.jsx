@@ -34,6 +34,9 @@ function HeaderComponent(props) {
                   <img src={person} alt="person" className="header-person" />
                 </Link>
               </button>
+              <Link to="/myreservpage" className="header-myreserv">
+                  예약관리
+              </Link>
               <button className="header-logout" onClick={props.onLogout}>
                 로그아웃
               </button>

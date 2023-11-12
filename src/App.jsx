@@ -12,6 +12,7 @@ import HeaderComponent from "./components/HeadComponent/HeadComponent";
 import "./App.css";
 import MyPage from "./pages/MyPage";
 import AdminPage from "./pages/AdminPage";
+import MyReservPage from "./pages/MyReservPage";
 
 function App() {
   // 로그인 상태 확인
@@ -49,6 +50,7 @@ function App() {
               <Route path="/" element={<Navigate to="/booking" />} />
               <Route path="/booking" element={<BookingPage />} />
               <Route path="/mypage" element={<MyPage />} />
+              <Route path="/myreservpage" element={<MyReservPage />} />
               {isAdmin && <Route path="/adminpage" element={<AdminPage />} />}
               {/* 추가적인 로그인 후 라우트들 */}
             </>

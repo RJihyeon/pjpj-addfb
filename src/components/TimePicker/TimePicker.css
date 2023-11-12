@@ -5,15 +5,16 @@
   flex-wrap: wrap;
   justify-content: center;
   max-width: 600px; /* Set the maximum width to fit 5 buttons in one line */
-  margin: 0 auto; /* Center the container on the page */
+  margin: 0 auto;
+  margin-bottom: 30px;
 }
 
 .timePicker button {
   margin: 10px;
   padding: 10px 20px;
-  background-color: #007bff;
-  color: #ffffff;
-  border: none;
+  background-color: #151515;
+  color: #9B9B9B;
+  border: 1px solid #9B9B9B;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -23,5 +24,6 @@
 }
 
 .timePicker button.clicked {
-  background-color: #da6fba;
+  background-color: #9B9B9B;
+  color:#151515;
 }
