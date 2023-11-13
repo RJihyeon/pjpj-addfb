@@ -2,33 +2,41 @@
 
 .dropdown {
   position: relative;
-  display: inline-block;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .dropdown-toggle {
-  background-color: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  background-color: #1C1C1C;
   border: 1px solid #ccc;
-  color: #333;
-  padding: 10px 20px;
+  color: #ccc;
+  padding: 8px 20px; /* Adjusted padding */
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border-radius: 5px;
 }
 
 .dropdown.open .dropdown-toggle {
-  background-color: #ddd;
+  background-color: #ccc;
+  color: #1c1c1c;
 }
 
 .dropdown-menu {
   list-style: none;
-  padding: 0;
-  margin: 0;
+  padding: 5px 15px; /* Adjusted padding */
+  margin: 5px; /* Adjusted margin */
   position: absolute;
-  top: 100%;
-  left: 0;
+  top: 100%; /* Position below the toggle button */
+  left: 50%;
+  transform: translateX(-50%);
   display: none;
-  background-color: white;
+  background-color: #1C1C1C;
   border: 1px solid #ccc;
   z-index: 1;
+  text-align: center;
 }
 
 .dropdown.open .dropdown-menu {
@@ -36,14 +44,15 @@
 }
 
 .dropdown-menu li {
-  padding: 10px 20px;
+  padding: 8px 16px; /* Adjusted padding */
   cursor: pointer;
   transition: background-color 0.3s ease;
-  color: burlywood;
+  color: #ddd;
 }
 
 .dropdown-menu li:hover {
   background-color: #ddd;
+  color: #333;
 }
 
 .selected-category {

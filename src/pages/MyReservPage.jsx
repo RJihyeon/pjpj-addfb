@@ -1,14 +1,15 @@
 import HeaderComponent from "../components/HeadComponent/HeadComponent";
-import InfoComponent from "../components/InfoComponent/InfoComponent";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import NavComponent from "../components/NavComponent/NavComponent";
 
 
-function MyPage() {
+function MyReservPage() {
   return (
     <div>
-      <NavComponent headerText="마이페이지" bannerText="회원정보수정" />
-      <InfoComponent />
+      <NavComponent headerText="예약관리" bannerText="예약관리" />
+      <p>예약신청된 정보들을 여기에 불러옵니다</p>
+      <button className="button">예약취소</button>
+    
       
       <FooterComponent/>
 
@@ -16,4 +17,4 @@ function MyPage() {
   );
 }
 
-export default MyPage;
+export default MyReservPage;

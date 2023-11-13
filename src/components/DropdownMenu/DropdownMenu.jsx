@@ -19,7 +19,7 @@ function DropdownMenu() {
   return (
     <div className={`dropdown ${isOpen ? 'open' : ''}`}>
       <button className="dropdown-toggle" onClick={toggleDropdown}>
-        {selectedCategory || '시설 선택'}
+        {selectedCategory || '시설선택'}
       </button>
       {isOpen && (
         <ul className="dropdown-menu">
@@ -31,7 +31,7 @@ function DropdownMenu() {
         </ul>
       )}
       <div className="selected-category">
-        {selectedCategory ? `선택된 시설: ${selectedCategory}` : '시설을 선택하세요'}
+        {selectedCategory ? `선택된 시설: ${selectedCategory}` : '선택된 시설:'}
       </div>
     </div>
   );

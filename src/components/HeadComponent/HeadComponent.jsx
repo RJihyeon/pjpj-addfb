@@ -1,13 +1,18 @@
 // HeaderComponent.js
 
 import React from "react";
-import "./HeadComponent.css"; // HeaderComponent.css 파일을 import
+import "./HeadComponent.css"; 
 import logo from "./yonsei logo 1.png";
 import person from "./person.png";
 import { Link } from "react-router-dom";
+import HeaderDropdown from "./HeaderDropdown";
+
+
+
 
 function HeaderComponent(props) {
   return (
+    
     <div>
       <div className="header-header">
         <Link to="/">
@@ -25,15 +30,18 @@ function HeaderComponent(props) {
               </Link>
               {/*관리자일 경우에만 관리자페이지 노출 */}
               {props.isAdmin && (
-                <Link to="/adminpage" className="header-admin">
-                  관리자페이지
-                </Link>
-              )}
-              <button className="header-myInfo">
-                <Link to="/mypage">
+                <button className="header-myInfo">
+                <Link to="/adminpage">
                   <img src={person} alt="person" className="header-person" />
                 </Link>
               </button>
+              )}
+              
+              
+
+              <HeaderDropdown />
+
+
               <button className="header-logout" onClick={props.onLogout}>
                 로그아웃
               </button>
@@ -47,7 +55,10 @@ function HeaderComponent(props) {
               <Link to="/login" className="header-login">
                 로그인
               </Link>
+              
+              
             </>
+
           )}
         </div>
       </div>

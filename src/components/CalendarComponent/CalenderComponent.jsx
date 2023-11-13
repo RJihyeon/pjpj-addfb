@@ -4,7 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import koLocale from "@fullcalendar/core/locales/ko";
-import "./Calendar.css";
+import "./CalendarComponent.css";
 
 function CalendarComponent() {
   const [events, setEvents] = useState([]);
