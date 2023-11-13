@@ -23,7 +23,7 @@ const Set = styled.div`
   justify-content: space-between;
   margin-bottom: 10px;
   margin-top: 10px;
-  width: 70vh;
+  width: 500px;
 `;
 
 const Title = styled.p`
@@ -71,9 +71,6 @@ const IdTitle = styled.p`
   color: #9b9b9b;
   font-size: 15px;
   font-weight: 600;
-  padding-right: 0px;
-  margin-right: 0px;
-  margin-left: 105px;
 `;
 
 const IdInput = styled.input`
@@ -81,7 +78,7 @@ const IdInput = styled.input`
   background-color: rgb(217, 217, 217, 0.05);
   border: 2px solid #141414;
   width: 355px;
-  margin-left: 40px;
+  margin-left: 50px;
   padding-left: 10px;
   height: 40px;
 `;
@@ -89,9 +86,9 @@ const IdInput = styled.input`
 const IdSet = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  width: 100vh;
+  margin: 10px;
+  width: 600px;
+  margin-left: 110px;
 `;
 
 const Comments = styled.p`
@@ -109,7 +106,6 @@ const Privacy = styled.div`
   margin-bottom: 0px;
 `;
 
-
 export {
   Info,
   Set,
@@ -124,5 +120,4 @@ export {
   IdSet,
   Comments,
   Privacy,
-
 };

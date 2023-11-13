@@ -72,7 +72,7 @@ function SignupComponent() {
           <Set>
             <Title>비밀번호</Title>
             <Input
-              type="text"
+              type="password"
               value={pw}
               onChange={(event) => setPw(event.target.value)}
             ></Input>
