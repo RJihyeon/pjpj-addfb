@@ -13,6 +13,7 @@ import "./App.css";
 import MyPage from "./pages/MyPage";
 import AdminPage from "./pages/AdminPage";
 import FindPage from "./pages/FindPage";
+import MyReservPage from "./pages/MyReservPage";
 
 function App() {
   // 로그인 상태 확인
@@ -86,6 +87,7 @@ function App() {
           <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/find" element={<FindPage />} />
+          <Route path="/myreservpage" element={<MyReservPage />} />
         </Routes>
       </div>
     </Router>
