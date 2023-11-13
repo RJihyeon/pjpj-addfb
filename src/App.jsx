@@ -83,7 +83,10 @@ function App() {
             </>
           )}
           {/* 공통 또는 로그인 상태에 따라 보이는 라우트들 */}
-          <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+          <Route
+            path="/login"
+            element={<LoginPage onLogin={() => handleLogin()} />}
+          />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/myreservpage" element={<MyReservPage />} />
         </Routes>
