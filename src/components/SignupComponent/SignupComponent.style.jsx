@@ -23,7 +23,7 @@ const Set = styled.div`
   justify-content: space-between;
   margin-bottom: 10px;
   margin-top: 10px;
-  width: 70vh;
+  width: 500px;
 `;
 
 const Title = styled.p`
@@ -50,6 +50,7 @@ const Button = styled.button`
   margin-top: 10px;
   color: #fff;
   font-size: 18px;
+  cursor: pointer;
 `;
 
 const IdCheck = styled.button`
@@ -57,6 +58,7 @@ const IdCheck = styled.button`
   border: 2px solid #141414;
   color: #9b9b9b;
   font-weight: 500;
+  cursor: pointer;
 `;
 
 const Info = styled.p`
@@ -71,9 +73,6 @@ const IdTitle = styled.p`
   color: #9b9b9b;
   font-size: 15px;
   font-weight: 600;
-  padding-right: 0px;
-  margin-right: 0px;
-  margin-left: 105px;
 `;
 
 const IdInput = styled.input`
@@ -81,7 +80,7 @@ const IdInput = styled.input`
   background-color: rgb(217, 217, 217, 0.05);
   border: 2px solid #141414;
   width: 355px;
-  margin-left: 40px;
+  margin-left: 50px;
   padding-left: 10px;
   height: 40px;
 `;
@@ -89,9 +88,9 @@ const IdInput = styled.input`
 const IdSet = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  width: 100vh;
+  margin: 10px;
+  width: 600px;
+  margin-left: 110px;
 `;
 
 const Comments = styled.p`
@@ -99,7 +98,7 @@ const Comments = styled.p`
   font-size: 14px;
   font-weight: 500;
   line-height : normal : 
-text-align : center;
+  text-align : center;
 
 
 `;
@@ -108,7 +107,6 @@ const Privacy = styled.div`
   font-size: 13px;
   margin-bottom: 0px;
 `;
-
 
 export {
   Info,
@@ -124,5 +122,4 @@ export {
   IdSet,
   Comments,
   Privacy,
-
 };

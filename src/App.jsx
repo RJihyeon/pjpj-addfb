@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -12,7 +12,6 @@ import HeaderComponent from "./components/HeadComponent/HeadComponent";
 import "./App.css";
 import MyPage from "./pages/MyPage";
 import AdminPage from "./pages/AdminPage";
-import FindPage from "./pages/FindPage";
 import MyReservPage from "./pages/MyReservPage";
 
 function App() {
@@ -43,18 +42,18 @@ function App() {
     fetchLoginStatus();
   }, []);
 
-  // const handleLogin = () => {
-  //   // 로그인 처리 로직 추가(로그인 됐으면 useState(true)로 바꿔주기)
-  //   setIsLoggedIn(true);
-  //   // 여기서 관리자 여부를 확인하는 로직을 추가
-  //   // 예: 서버에서 관리자 여부를 가져와서 setIsAdmin(true)로 설정
-  // };
+  const handleLogin = () => {
+    // 로그인 처리 로직 추가(로그인 됐으면 useState(true)로 바꿔주기)
+    setIsLoggedIn(true);
+    // 여기서 관리자 여부를 확인하는 로직을 추가
+    // 예: 서버에서 관리자 여부를 가져와서 setIsAdmin(true)로 설정
+  };
 
-  // const handleLogout = () => {
-  //   // 로그아웃 처리 로직
-  //   setIsLoggedIn(false);
-  //   setIsAdmin(false);
-  // };
+  const handleLogout = () => {
+    // 로그아웃 처리 로직
+    setIsLoggedIn(false);
+    setIsAdmin(false);
+  };
 
 
   return (
@@ -86,9 +85,11 @@ function App() {
             </>
           )}
           {/* 공통 또는 로그인 상태에 따라 보이는 라우트들 */}
-          <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+          <Route
+            path="/login"
+            element={<LoginPage onLogin={() => handleLogin()} />}
+          />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/find" element={<FindPage />} />
           <Route path="/myreservpage" element={<MyReservPage />} />
         </Routes>
       </div>
