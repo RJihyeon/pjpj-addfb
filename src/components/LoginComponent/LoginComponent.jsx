@@ -28,8 +28,8 @@ function RegisterComponent() {
         return response.json();
       })
       .then((data) => {
-        window.alert("일단 여기까진됨");
         navigate('/booking'); // 페이지 이동
+        
       })
       .catch((error) => {
         // 에러 처리

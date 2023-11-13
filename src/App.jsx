@@ -21,7 +21,7 @@ function App() {
 
   const handleLogin = () => {
     // 로그인 처리 로직 추가(로그인 됐으면 useState(true)로 바꿔주기)
-    setIsLoggedIn(true);
+    setIsLoggedIn(false);
     // 여기서 관리자 여부를 확인하는 로직을 추가
     // 예: 서버에서 관리자 여부를 가져와서 setIsAdmin(true)로 설정
   };
@@ -32,15 +32,17 @@ function App() {
     setIsAdmin(false);
   };
 
+
   return (
     <Router>
       <div className="App">
+        
         <HeaderComponent
           isLoggedIn={isLoggedIn}
           onLogout={handleLogout}
           isAdmin={isAdmin}
         />
-
+        
         <Routes>
           {/* 로그인 여부에 따라 다르게 라우팅 */}
           {isLoggedIn ? (

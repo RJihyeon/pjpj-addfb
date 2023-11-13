@@ -52,7 +52,7 @@ router.post('/login', (req, res) => {
     // 모듈을 활용하여 DB로부터 로그인 정보가 올바른지 확인
     auth_functions.authenticateUser(id, password, (err, results) => {
         // 로그인 성공 시 세션에 DB에 있는 pw를 제외한 모든 정보 저장. 추후 꺼내 쓰도록 하자.
-        if (!results) {
+        if (results) {
             const userId = results.id;
             const phone_num = results.phone_num;
             const student_id = results.student_id;
@@ -223,6 +223,20 @@ router.post('/get_user_info', (req, res) => {
         res.status(401).send("No session exists");
     }
 });
+
+router.route('/checklogin').get(
+    function(req, res) {
+        if (req.session.user) {
+            const userData = req.session.user;
+            const responseData = JSON.stringify(userData);
+            res.status(200).json(responseData);
+        }
+        // 세션이 만료되었거나 로그인 상태가 아님
+        else {
+            res.status(401).send("No session exists");
+        }
+    }
+  );
 
 router.route('/reserve').get(
     function(req, res) {
