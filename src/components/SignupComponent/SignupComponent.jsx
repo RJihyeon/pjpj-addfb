@@ -29,6 +29,11 @@ function SignupComponent() {
 
   //서버에 보내기
   const register = () => {
+    //개인정보 수집 동의 안했으면 return
+    if (!agreePrivacy) {
+      alert("개인 정보 수집 및 이용에 동의해주세요.");
+      return;
+    }
     axios
       .post("/signup", {
         id: id,
@@ -51,6 +56,29 @@ function SignupComponent() {
       });
   };
 
+  //아이디 중복확인
+  const checkDuplicateId = () => {
+    // 중복 확인을 위한 서버 요청
+    axios
+      .post("/checkDuplicateId", { id })
+      .then((response) => {
+        // 서버 응답에 따라 팝업 표시
+        if (response.data.exists) {
+          alert("이미 존재하는 ID입니다.");
+        } else {
+          alert("사용 가능한 ID입니다.");
+        }
+      })
+      .catch((error) => {
+        // 서버 통신 중 에러 발생한 경우
+        console.error("서버 통신 오류:", error);
+        // 추가적인 에러 처리
+      });
+  };
+
+  //개인정보 이용동의 여부 확인
+  const [agreePrivacy, setAgreePrivacy] = useState(false);
+
   return (
     <div>
       <Wrapper>
@@ -67,7 +95,7 @@ function SignupComponent() {
               value={id}
               onChange={(event) => setId(event.target.value)}
             ></IdInput>
-            <IdCheck>중복확인</IdCheck>
+            <IdCheck onClick={checkDuplicateId}>중복확인</IdCheck>
           </IdSet>
           <Set>
             <Title>비밀번호</Title>
@@ -143,7 +171,11 @@ function SignupComponent() {
           </Set>
 
           <Privacy>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={agreePrivacy}
+              onChange={() => setAgreePrivacy(!agreePrivacy)}
+            />
             <label for="myCheckbox"> 개인 정보 수집 및 이용 동의</label>
           </Privacy>
 

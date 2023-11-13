@@ -50,6 +50,7 @@ const Button = styled.button`
   margin-top: 10px;
   color: #fff;
   font-size: 18px;
+  cursor: pointer;
 `;
 
 const IdCheck = styled.button`
@@ -57,6 +58,7 @@ const IdCheck = styled.button`
   border: 2px solid #141414;
   color: #9b9b9b;
   font-weight: 500;
+  cursor: pointer;
 `;
 
 const Info = styled.p`
@@ -96,7 +98,7 @@ const Comments = styled.p`
   font-size: 14px;
   font-weight: 500;
   line-height : normal : 
-text-align : center;
+  text-align : center;
 
 
 `;
