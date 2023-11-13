@@ -5,7 +5,7 @@ import FooterComponent from "../components/FooterComponent/FooterComponent";
 import RegisterComponent from "../components/LoginComponent/LoginComponent";
 import NavComponent from "../components/NavComponent/NavComponent";
 
-function LoginPage() {
+function LoginPage({ onLogin }) {
   const [isChecked, setIsChecked] = useState(false);
   const [username, setUsername] = useState("");
 
@@ -33,7 +33,7 @@ function LoginPage() {
   return (
     <div>
       <NavComponent headerText="로그인" bannerText="로그인" />
-      <RegisterComponent />
+      <RegisterComponent onLogin={onLogin} />
       <FooterComponent />
     </div>
   );
