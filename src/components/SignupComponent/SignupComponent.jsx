@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Set,
   Title,
@@ -17,6 +18,8 @@ import {
 import axios from "axios";
 
 function SignupComponent() {
+  const navigate = useNavigate();
+
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const [pwcheck, setPwcheck] = useState("");
@@ -46,6 +49,9 @@ function SignupComponent() {
       })
       .then((response) => {
         // Handle success.
+        //회원가입 성공했으면 login 페이지로 라우팅
+        alert("회원가입 성공. 로그인을 진행해주세요.");
+        navigate("/login");
         console.log("Well done!");
         console.log("User profile", response.data.user);
         console.log("User token", response.data.jwt);
