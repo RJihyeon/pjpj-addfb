@@ -89,27 +89,27 @@ function comparePassword(userId, userInputPassword, callback) {
 }
 
 // 아이디 중복 확인
-function checkDuplicateId(targetId) {
-  // 중복 확인 쿼리
-  const query = "SELECT COUNT(*) AS count FROM users WHERE id = ?";
+function checkDuplicateId(targetId, callback) {
+    // 중복 확인 쿼리
+    const query = 'SELECT COUNT(*) AS count FROM users WHERE id = ?';
 
-  // 매개변수 설정
-  db.query(query, [targetId], (error, results) => {
-    if (error) {
-      return res.status(500).json({
-        error: "Internal Server Error from function checkDuplicateId",
-      });
-    }
-    // 결과에서 개수 확인
-    const count = results[0].count;
-
-    // 중복 여부 확인
-    if (count > 0) {
-      return true;
-    } else {
-      return false;
-    }
-  });
+    // 매개변수 설정
+    db.query(query, [targetId], (error, results) => {
+        if (error) {
+            callback(error, null);
+        }
+        // 결과에서 개수 확인
+        const count = results[0].count;
+        console.log("count: ", count);
+        console.log(count > 0);
+    
+        // 중복 여부 확인
+        if (count > 0) {
+            callback(null, true);
+        } else {
+            callback(null, false);
+        }
+    }); 
 }
 
 // 회원가입 함수

@@ -69,7 +69,7 @@ function SignupComponent() {
       .post("/checkDuplicateId", { id: id })
       .then((response) => {
         // 서버 응답에 따라 팝업 표시
-        if (response.data) {
+        if (response) {
           alert("이미 존재하는 ID입니다.");
         } else {
           alert("사용 가능한 ID입니다.");

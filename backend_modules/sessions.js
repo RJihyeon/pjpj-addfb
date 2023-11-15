@@ -89,12 +89,14 @@ router.post("/login", (req, res) => {
 
 // 아이디 중복 확인
 router.post("/checkDuplicateId", (req, res) => {
-  if (auth_functions.checkDuplicateId(req.body.id)) {
-    res.send(true);
-  }
-  else {
-    res.send(false);
-  }
+  auth_functions.checkDuplicateId(req.body.id, (err, isDuplicated) => {
+    if (isDuplicated) {
+      res.send(true);
+    }
+    else {
+      res.send(false);
+    }
+  })
 }) 
 
 // 회원가입
