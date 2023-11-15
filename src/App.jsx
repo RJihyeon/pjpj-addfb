@@ -28,12 +28,12 @@ function App() {
 
   console.log(isLoggedIn + "isloggedin");
 
-  // useEffect(() => {
-  //   // 서버에서 로그인 상태 및 관리자 여부를 가져오는 로직
-  //   const fetchLoginStatus = async () => {
-  //     try {
-  //       const response = await fetch("http://localhost:5000/checklogin");
-  //       const data = await response.json();
+  useEffect(() => {
+    // 서버에서 로그인 상태 및 관리자 여부를 가져오는 로직
+    const fetchLoginStatus = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/checklogin");
+        const data = await response.json();
 
         if (data.success) {
           setIsLoggedIn(true);
