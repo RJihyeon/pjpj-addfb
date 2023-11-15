@@ -13,12 +13,18 @@ import "./App.css";
 import MyPage from "./pages/MyPage";
 import AdminPage from "./pages/AdminPage";
 import MyReservPage from "./pages/MyReservPage";
+import FindidPage from "./pages/FindidPage";
+import FindpwPage from "./pages/FindpwPage";
+import FindidpwPage from "./pages/FindidpwPage";
+import SetpwPage from "./pages/SetpwPage";
+import io from 'socket.io-client';
 
 function App() {
   // 로그인 상태 확인
-  const [isLoggedIn, setIsLoggedIn] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   // 관리자 로그인 상태 확인
   const [isAdmin, setIsAdmin] = useState();
+  const [socket, setSocket] = useState(null);
 
   console.log(isLoggedIn + "isloggedin");
 
@@ -29,20 +35,20 @@ function App() {
   //       const response = await fetch("http://localhost:5000/checklogin");
   //       const data = await response.json();
 
-  //       if (data.success) {
-  //         setIsLoggedIn(true);
-  //         setIsAdmin(data.isAdmin);
-  //       } else {
-  //         setIsLoggedIn(false);
-  //         setIsAdmin(false);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching login status:", error);
-  //     }
-  //   };
+        if (data.success) {
+          setIsLoggedIn(true);
+          setIsAdmin(data.isAdmin);
+        } else {
+          setIsLoggedIn(false);
+          setIsAdmin(false);
+        }
+      } catch (error) {
+        console.error("Error fetching login status:", error);
+      }
+    };
 
-  //   fetchLoginStatus();
-  // }, []);
+    fetchLoginStatus();
+  }, []);
 
   const handleLogin = () => {
     // 로그인 처리 로직 추가(로그인 됐으면 useState(true)로 바꿔주기)
@@ -90,6 +96,12 @@ function App() {
             // 로그인하지 않은 경우
             <>
               <Route path="/" element={<Navigate to="/login" />} />
+              <Route path="/FindidpwPage" element={<FindidpwPage />} />
+              <Route path="/FindidPage" element={<FindidPage />} />
+              <Route path="/FindpwPage" element={<FindpwPage />} />
+              <Route path="/SetpwPage" element={<SetpwPage />} />
+
+
               {/* 추가적인 로그아웃 상태에서의 라우트들 */}
             </>
           )}
