@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { isRouteErrorResponse, useNavigate } from "react-router-dom";
 import {
   Set,
   Title,
@@ -66,12 +66,14 @@ function SignupComponent() {
   const checkDuplicateId = () => {
     // 중복 확인을 위한 서버 요청
     axios
-      .post("/checkDuplicateId", { id })
+      .post("/checkDuplicateId", { id: id })
       .then((response) => {
         // 서버 응답에 따라 팝업 표시
-        if (response.data.exists) {
+
+        if (response.data) {
           alert("이미 존재하는 ID입니다.");
         } else {
+          console.log(id);
           alert("사용 가능한 ID입니다.");
         }
       })
