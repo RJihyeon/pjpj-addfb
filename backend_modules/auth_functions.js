@@ -91,6 +91,28 @@ function comparePassword(userId, userInputPassword, callback) {
     
 }
 
+// 아이디 중복 확인
+function checkDuplicateId(targetId) {
+    // 중복 확인 쿼리
+    const query = 'SELECT COUNT(*) AS count FROM your_table WHERE id = ?';
+
+    // 매개변수 설정
+    connection.query(query, [targetId], (error, results) => {
+        if (error) {
+            return res.status(500).json({ error: 'Internal Server Error from function checkDuplicateId' });
+        }
+        // 결과에서 개수 확인
+        const count = results[0].count;
+    
+        // 중복 여부 확인
+        if (count > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }); 
+}
+
 // 회원가입 함수
 function signup(query, values, callback) {
     db.query(query, values, (err, results) => {
@@ -207,6 +229,7 @@ function cleanExpiredSessions() {
 module.exports = {
     authenticateUser,
     cleanExpiredSessions,
+    checkDuplicateId,
     signup,
     comparePassword,
     findid,
