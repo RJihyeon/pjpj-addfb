@@ -16,9 +16,11 @@ import MyReservPage from "./pages/MyReservPage";
 
 function App() {
   // 로그인 상태 확인
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState();
   // 관리자 로그인 상태 확인
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState();
+
+  console.log(isLoggedIn + "isloggedin");
 
   useEffect(() => {
     // 서버에서 로그인 상태 및 관리자 여부를 가져오는 로직

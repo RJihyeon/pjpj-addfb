@@ -10,40 +10,36 @@ function RegisterComponent({ onLogin }) {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  //사실 나 ㅣㅇ거 잘 이해가 안됩니ㅏ.... 이게 뭐야도대체
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setIsLoading(true);
-    // 입력된 id와 password 값을 서버로 보내는 fetch 요청
-    fetch("http://localhost:5000/login", {
-      method: "POST", // POST 요청을 사용하려면 메서드를 설정
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id, password }), // JSON 형태로 데이터 전송
-    })
-      .then((response) => {
-        if (!response.ok) {
-          setIsLoading(false);
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        // 서버에서 로그인 상태를 받아올 수 있다면 부모 component의 onlogin 호출 (App.jsx: handlelogin setIslogin을 true로~)
+
+    try {
+      const response = await axios.post("http://localhost:5000/login", {
+        id,
+        password,
+      });
+
+      if (response.status === 200) {
+        // 로그인 성공 시
+        console.log("성공");
         if (onLogin) {
           onLogin(true);
-        } else {
-          window.alert(
-            "로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요."
-          );
         }
-      })
-      .catch((error) => {
-        // 에러 처리
+        // 리다이렉션
+        navigate("/booking");
+      } else {
+        // 로그인 실패 시
+        window.alert("로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.");
         setIsLoading(false);
-        console.error("Error:", error);
-      });
+      }
+    } catch (error) {
+      // 에러 처리
+      setIsLoading(false);
+      console.error("Error:", error);
+      window.alert("로그인에 실패했습니다. 서버 오류입니다.");
+    }
   };
+
   return (
     <div>
       <div className="login-container">
@@ -58,7 +54,7 @@ function RegisterComponent({ onLogin }) {
             onChange={(e) => setId(e.target.value)}
           />
           <input
-            type="text"
+            type="password"
             className="pw-input"
             placeholder="비밀번호를 입력하세요"
             value={password}
