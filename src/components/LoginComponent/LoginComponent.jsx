@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./LoginComponent.css";
 import axios from "axios";
 
-function RegisterComponent({ onLogin }) {
+function RegisterComponent({ onLogin, onLoginAdmin }) {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [data, setData] = useState(null);
@@ -22,8 +22,14 @@ function RegisterComponent({ onLogin }) {
       if (response.status === 200) {
         // 로그인 성공 시
         console.log("성공");
+
+        const isAdmin = response.data.isAdmin;
+
         if (onLogin) {
           onLogin(true);
+        }
+        if (isAdmin && onLoginAdmin) {
+          onLoginAdmin(true);
         }
         // 리다이렉션
         navigate("/booking");
