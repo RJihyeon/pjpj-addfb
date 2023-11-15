@@ -46,6 +46,8 @@ function RegisterComponent({ onLogin, onLoginAdmin }) {
     }
   };
 
+ 
+
   return (
     <div>
       <div className="login-container">
