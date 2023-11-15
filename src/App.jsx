@@ -28,19 +28,16 @@ function App() {
 
   console.log(isLoggedIn + "isloggedin");
 
-  useEffect(() => {
-    // 서버에서 로그인 상태 및 관리자 여부를 가져오는 로직
-    const fetchLoginStatus = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/checklogin");
-        const data = await response.json();
+  // useEffect(() => {
+  //   // 서버에서 로그인 상태 및 관리자 여부를 가져오는 로직
+  //   const fetchLoginStatus = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:5000/checklogin");
+  //       const data = await response.json();
 
         if (data.success) {
           setIsLoggedIn(true);
           setIsAdmin(data.isAdmin);
-
-          const newSocket = io('http://localhost:5000');
-          setSocket(newSocket);
         } else {
           setIsLoggedIn(false);
           setIsAdmin(false);
@@ -51,13 +48,6 @@ function App() {
     };
 
     fetchLoginStatus();
-
-    return () => {
-      if (socket) {
-        socket.disconnect();
-      }
-    };
-
   }, []);
 
   const handleLogin = () => {
@@ -65,6 +55,10 @@ function App() {
     setIsLoggedIn(true);
     // 여기서 관리자 여부를 확인하는 로직을 추가
     // 예: 서버에서 관리자 여부를 가져와서 setIsAdmin(true)로 설정
+  };
+
+  const handleAdmin = () => {
+    setIsAdmin(true);
   };
 
   const handleLogout = () => {
@@ -112,7 +106,12 @@ function App() {
           {/* 공통 또는 로그인 상태에 따라 보이는 라우트들 */}
           <Route
             path="/login"
-            element={<LoginPage onLogin={() => handleLogin()} />}
+            element={
+              <LoginPage
+                onLogin={() => handleLogin()}
+                onLoginAdmin={() => handleAdmin()}
+              />
+            }
           />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/myreservpage" element={<MyReservPage />} />
