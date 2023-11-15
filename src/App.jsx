@@ -16,9 +16,11 @@ import MyReservPage from "./pages/MyReservPage";
 
 function App() {
   // 로그인 상태 확인
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState();
   // 관리자 로그인 상태 확인
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState();
+
+  console.log(isLoggedIn + "isloggedin");
 
   useEffect(() => {
     // 서버에서 로그인 상태 및 관리자 여부를 가져오는 로직
@@ -73,7 +75,10 @@ function App() {
             <>
               <Route path="/" element={<Navigate to="/booking" />} />
               <Route path="/booking" element={<BookingPage />} />
-              <Route path="/mypage" element={<MyPage />} />
+              <Route
+                path="/mypage"
+                element={<MyPage isLoggedIn={isLoggedIn} />}
+              />
               {isAdmin && <Route path="/adminpage" element={<AdminPage />} />}
               {/* 추가적인 로그인 후 라우트들 */}
             </>
