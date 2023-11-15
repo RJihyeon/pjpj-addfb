@@ -73,7 +73,10 @@ function App() {
             <>
               <Route path="/" element={<Navigate to="/booking" />} />
               <Route path="/booking" element={<BookingPage />} />
-              <Route path="/mypage" element={<MyPage />} />
+              <Route
+                path="/mypage"
+                element={<MyPage isLoggedIn={isLoggedIn} />}
+              />
               {isAdmin && <Route path="/adminpage" element={<AdminPage />} />}
               {/* 추가적인 로그인 후 라우트들 */}
             </>
