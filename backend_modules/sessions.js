@@ -57,7 +57,7 @@ router.post("/login", (req, res) => {
       const userName = results.name;
       const affiliation = results.affiliation;
       const division = results.division;
-
+      let isAdmin = false;
       const userData = {
         userId: userId,
         phone_num: phone_num,
@@ -65,13 +65,21 @@ router.post("/login", (req, res) => {
         userName: userName,
         affiliation: affiliation,
         division: division,
+        isAdmin : isAdmin
       };
       req.session.user = userData;
-
+      if(userId === 'yonseidongari') {
+        console.log("관리자 로그인 성공");
+        isAdmin = true;
+        const responseData = JSON.stringify(userData);
+        res.status(200).json(responseData);
+      }
+      else {
+        console.log("로그인 성공");
+        const responseData = JSON.stringify(userData);
+        res.status(200).json(responseData);
+      }
       // 로그인 성공 시 위의 정보를 client에도 전송한다.
-      console.log("로그인 성공");
-      const responseData = JSON.stringify(userData);
-      res.status(200).json(responseData);
     } else {
       // 로그인 실패 시 실패했다고 client에 전송한다.
       res.status(401).send("Unauthorized Login");

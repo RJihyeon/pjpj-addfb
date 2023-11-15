@@ -57,7 +57,6 @@ router.route("/").get(function (req, res) {
   if (req.session.user) {
     //세션에 유저가 있다면
     console.log("세션있음");
-    res.redirect("/main.html");
   } else {
     console.log("세션없음");
     res.sendFile(path.join(__dirname, "/build/login.html"));

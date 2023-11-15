@@ -19,7 +19,7 @@ const HeaderDropdown = () => {
         <Menu isDropped={myPageIsOpen}>
           <Ul>
             <Li>
-              <LinkWrapper href="/mypage">회원정보수정</LinkWrapper>
+              <LinkWrapper href="http://localhost:5000/mypage">회원정보수정</LinkWrapper>
             </Li>
             <Li>
               <LinkWrapper href="/myreservpage">예약관리</LinkWrapper>
