@@ -28,7 +28,7 @@ function InfoComponent() {
   // 서버에서 데이터를 받아와서 상태 업데이트
   const fetchUserData = async () => {
     try {
-      const response = await fetch("/api/userdata"); // 서버에 사용자 정보를 요청하는 API 엔드포인트
+      const response = await fetch("/get_user_info"); // 서버에 사용자 정보를 요청하는 API 엔드포인트
       const data = await response.json();
 
       // 서버에서 받아온 데이터를 상태로 업데이트
