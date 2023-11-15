@@ -17,11 +17,12 @@ import FindidPage from "./pages/FindidPage";
 import FindpwPage from "./pages/FindpwPage";
 import FindidpwPage from "./pages/FindidpwPage";
 import SetpwPage from "./pages/SetpwPage";
-import io from 'socket.io-client';
+import io from "socket.io-client";
+import axios from "axios";
 
 function App() {
   // 로그인 상태 확인
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState();
   // 관리자 로그인 상태 확인
   const [isAdmin, setIsAdmin] = useState();
   const [socket, setSocket] = useState(null);
@@ -63,7 +64,7 @@ function App() {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post("/logout");
+      const response = await axios.get("http://localhost:5000/logout");
 
       if (response.status === 200) {
         // 로그아웃 성공 시
@@ -86,17 +87,15 @@ function App() {
     }
   };
 
-
   return (
     <Router>
       <div className="App">
-        
         <HeaderComponent
           isLoggedIn={isLoggedIn}
           onLogout={handleLogout}
           isAdmin={isAdmin}
         />
-        
+
         <Routes>
           {/* 로그인 여부에 따라 다르게 라우팅 */}
           {isLoggedIn ? (
@@ -119,7 +118,6 @@ function App() {
               <Route path="/FindidPage" element={<FindidPage />} />
               <Route path="/FindpwPage" element={<FindpwPage />} />
               <Route path="/SetpwPage" element={<SetpwPage />} />
-
 
               {/* 추가적인 로그아웃 상태에서의 라우트들 */}
             </>
