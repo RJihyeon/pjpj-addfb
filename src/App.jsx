@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   Navigate,
+  useNavigate,
 } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
@@ -62,29 +63,10 @@ function App() {
     setIsAdmin(true);
   };
 
-  const handleLogout = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/logout");
-
-      if (response.status === 200) {
-        // 로그아웃 성공 시
-        console.log("로그아웃 성공");
-
-        // 로그아웃 상태 업데이트
-        setIsLoggedIn(false);
-        setIsAdmin(false);
-
-        // 리다이렉션 또는 다른 작업 수행
-        Navigate("/login"); // 예시: 로그아웃 후 홈페이지로 리다이렉션
-      } else {
-        // 로그아웃 실패 시
-        window.alert("로그아웃에 실패했습니다. 다시 시도해주세요.");
-      }
-    } catch (error) {
-      // 에러 처리
-      console.error("Error:", error);
-      window.alert("로그아웃에 실패했습니다. 서버 오류입니다.");
-    }
+  const handleLogout = () => {
+    // 로그아웃 상태 업데이트
+    setIsLoggedIn(false);
+    setIsAdmin(false);
   };
 
   return (
@@ -92,8 +74,10 @@ function App() {
       <div className="App">
         <HeaderComponent
           isLoggedIn={isLoggedIn}
-          onLogout={handleLogout}
+          onLogin={() => handleLogin()}
+          onLogout={() => handleLogout()}
           isAdmin={isAdmin}
+          onLoginAdmin={() => handleAdmin()}
         />
 
         <Routes>
