@@ -6,9 +6,7 @@ const HeaderDropdown = () => {
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   const [boardIsOpen, boardRef, boardHandler] = useDetectClose(false);
 
-  const logoutClickHandler = () => {
-    console.log("logout");
-  };
+
 
   return (
     <Wrapper>
@@ -19,16 +17,16 @@ const HeaderDropdown = () => {
         <Menu isDropped={myPageIsOpen}>
           <Ul>
             <Li>
-              <LinkWrapper href="http://localhost:5000/mypage">회원정보수정</LinkWrapper>
+              <LinkWrapper to="http://localhost:5000/mypage">
+                회원정보수정
+              </LinkWrapper>
             </Li>
             <Li>
-              <LinkWrapper href="/myreservpage">예약관리</LinkWrapper>
+              <LinkWrapper to="/myreservpage">예약관리</LinkWrapper>
             </Li>
-            
           </Ul>
         </Menu>
       </DropdownContainer>
-
     </Wrapper>
   );
 };
@@ -42,10 +40,9 @@ const Wrapper = styled.div`
   align-items: center;
   color: white;
   font-size: 14px;
-  background:  #1c1c1c;
+  background: #1c1c1c;
   width: 70px;
   height: 50px;
-  
 `;
 
 const DropdownContainer = styled.div`
@@ -120,5 +117,3 @@ const LinkWrapper = styled.a`
   text-decoration: none;
   color: white;
 `;
-
-

@@ -8,8 +8,7 @@ function FindidPage() {
   return (
     <div>
       <NavComponent headerText="아이디 찾기" bannerText="아이디 찾기" />
-      <p></p>
-      <button>아이디찾기</button>
+      
       
     
       

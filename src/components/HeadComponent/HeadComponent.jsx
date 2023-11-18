@@ -57,9 +57,9 @@ function HeaderComponent(props) {
                   <Link to="/adminpage">
                     <img src={person} alt="person" className="header-person" />
                   </Link>
-                  <HeaderDropdown />
                 </button>
               )}
+              <HeaderDropdown />
             </>
           ) : (
             <>
