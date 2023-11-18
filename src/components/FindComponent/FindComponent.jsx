@@ -62,7 +62,7 @@ const FindComponent = () => {
 
   const findId = async () => {
     try {
-      const response = await axios.post("/findInfo", {
+      const response = await axios.post("/findid", {
         name: name,
         student_id: number,
       });
@@ -85,7 +85,7 @@ const FindComponent = () => {
 
   const findPw = async () => {
     try {
-      const response = await axios.post("/findPw", {
+      const response = await axios.post("/findpw", {
         name: name,
         student_id: number,
         id: id,

@@ -47,7 +47,6 @@ function HeaderComponent(props) {
               <Link to="/booking" className="header-book">
                 시설대관
               </Link>
-              <Link to="/FindidpwPage">아이디비번찾기</Link>
               <button className="header-logout" onClick={handleLogoutSubmit}>
                 로그아웃
               </button>

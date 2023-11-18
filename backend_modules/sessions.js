@@ -65,16 +65,15 @@ router.post("/login", (req, res) => {
         userName: userName,
         affiliation: affiliation,
         division: division,
-        isAdmin : isAdmin
+        isAdmin: isAdmin,
       };
       req.session.user = userData;
-      if(userId === 'yonseidongari') {
+      if (userId === "yonseidongari") {
         console.log("관리자 로그인 성공");
         isAdmin = true;
         const responseData = JSON.stringify(userData);
         res.status(200).json(responseData);
-      }
-      else {
+      } else {
         console.log("로그인 성공");
         const responseData = JSON.stringify(userData);
         res.status(200).json(responseData);
@@ -92,12 +91,11 @@ router.post("/checkDuplicateId", (req, res) => {
   auth_functions.checkDuplicateId(req.body.id, (err, isDuplicated) => {
     if (isDuplicated) {
       res.send(true);
-    }
-    else {
+    } else {
       res.send(false);
     }
-  })
-}) 
+  });
+});
 
 // 회원가입
 router.post("/signup", (req, res) => {
@@ -120,7 +118,7 @@ router.post("/signup", (req, res) => {
 
   // 아이디 중복 X
   else {
-  // password를 해싱한다.
+    // password를 해싱한다.
     bcrypt.genSalt(saltRounds, (err, salt) => {
       if (err) {
         console.error("솔트 생성 오류:", err);
