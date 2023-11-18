@@ -46,8 +46,6 @@ function RegisterComponent({ onLogin, onLoginAdmin }) {
     }
   };
 
- 
-
   return (
     <div>
       <div className="login-container">
@@ -76,7 +74,9 @@ function RegisterComponent({ onLogin, onLoginAdmin }) {
             로그인
           </button>
           <div className="container1">
-            <button className="find">아이디/비밀번호 찾기</button>
+            <Link to="/FindidpwPage" className="find">
+              아이디/비밀번호 찾기
+            </Link>
             <Link to="/signup">
               <button className="signup">회원가입</button>
             </Link>
