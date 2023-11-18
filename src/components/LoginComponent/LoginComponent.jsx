@@ -74,7 +74,7 @@ function RegisterComponent({ onLogin, onLoginAdmin }) {
             로그인
           </button>
           <div className="container1">
-            <Link to="/FindidpwPage" className="find">
+            <Link to="/find" className="find">
               아이디/비밀번호 찾기
             </Link>
             <Link to="/signup">

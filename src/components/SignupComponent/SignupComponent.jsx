@@ -82,6 +82,7 @@ function SignupComponent() {
         name: name,
         affiliation: affiliation,
         division: division,
+        email: email,
       })
       .then((response) => {
         // Handle success.
