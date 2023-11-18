@@ -6,8 +6,6 @@ const HeaderDropdown = () => {
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   const [boardIsOpen, boardRef, boardHandler] = useDetectClose(false);
 
-
-
   return (
     <Wrapper>
       <DropdownContainer>
@@ -17,12 +15,10 @@ const HeaderDropdown = () => {
         <Menu isDropped={myPageIsOpen}>
           <Ul>
             <Li>
-              <LinkWrapper to="http://localhost:5000/mypage">
-                회원정보수정
-              </LinkWrapper>
+              <LinkWrapper href="/mypage">회원정보수정</LinkWrapper>
             </Li>
             <Li>
-              <LinkWrapper to="/myreservpage">예약관리</LinkWrapper>
+              <LinkWrapper href="/myreservpage">예약관리</LinkWrapper>
             </Li>
           </Ul>
         </Menu>
