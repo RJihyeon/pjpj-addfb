@@ -14,9 +14,7 @@ import "./App.css";
 import MyPage from "./pages/MyPage";
 import AdminPage from "./pages/AdminPage";
 import MyReservPage from "./pages/MyReservPage";
-import FindidPage from "./pages/FindidPage";
-import FindpwPage from "./pages/FindpwPage";
-import FindidpwPage from "./pages/FindidpwPage";
+import FindPage from "./pages/FindPage";
 import SetpwPage from "./pages/SetpwPage";
 import io from "socket.io-client";
 import axios from "axios";
@@ -98,10 +96,7 @@ function App() {
             // 로그인하지 않은 경우
             <>
               <Route path="/" element={<Navigate to="/login" />} />
-              <Route path="/FindidpwPage" element={<FindidpwPage />} />
-              <Route path="/FindidPage" element={<FindidPage />} />
-              <Route path="/FindpwPage" element={<FindpwPage />} />
-              <Route path="/SetpwPage" element={<SetpwPage />} />
+              <Route path="/find" element={<FindPage />} />
 
               {/* 추가적인 로그아웃 상태에서의 라우트들 */}
             </>
