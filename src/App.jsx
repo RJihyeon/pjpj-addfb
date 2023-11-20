@@ -25,7 +25,7 @@ function App() {
   // 로그인 상태 확인
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   // 관리자 로그인 상태 확인
-  const [isAdmin, setIsAdmin] = useState();
+  const [isAdmin, setIsAdmin] = useState(true);
   const [socket, setSocket] = useState(null);
 
   console.log(isLoggedIn + "isloggedin");

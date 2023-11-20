@@ -26,7 +26,7 @@ function openreserve(io) {
       var info;
       
       // 예약 관련 소켓 이벤트 처리 -> 이벤트 이름을 makeReservation으로 해야 응답을 받을 수 있음
-      socket.on('makeReservationfirst', (data) => {//data에는 클라이언트에서 서버로 전송된 데이터가 들어감
+      socket.on('makeReservation', (data) => {//data에는 클라이언트에서 서버로 전송된 데이터가 들어감
         // 예약을 처리하고 클라이언트에 응답을 보낼 수 있음
         
         db.query('SELECT data FROM sessions', function(err, row) {//세션정보에 담긴 번호를 가져옴 바로 DB에서
@@ -38,23 +38,26 @@ function openreserve(io) {
             const jsondata = JSON.parse(firstdata);
             const userPhoneNum = jsondata.user.phone_num;
             const studentID = jsondata.user.student_id;
-            info = [userPhoneNum, data[0],data[1],data[2],data[3] + "00",studentID, data[5], data[6]]
-            db.query(`INSERT INTO reserve(phone_num, year, month, date, space${data[4]},student_id, population, activities) VALUE(?,?,?,?,?,?,?,?)`//reserve db에 삽입
+            let dividedDate = data.date.split('-');
+            info = [userPhoneNum, dividedDate[0],dividedDate[1],dividedDate[2],data.time + "00",studentID]
+            db.query(`INSERT INTO reserve(phone_num, year, month, date, space${data.category},student_id) VALUE(?,?,?,?,?,?)`//reserve db에 삽입
             , info, function(err, row) {//population이 이용사람수이긴한데 필요없으면 바꿈
                 if(err) {
                     console.log(err);
                 }    
                 else {
-                  db.query('SELECT * FROM reserve WHERE phone_num = ?', userPhoneNum, function(err, row) {//클라이언트쪽으로 넘길 자료 
-                    if(err) {                                                                         //이거 row에 그 번호에 따른 reserve에서 행들이 들어감
-                        console.log(err);
-                    }    
-                    if(row.length > 0) {
-                      // io.emit() 또는 socket.emit()을 사용하여 클라이언트에 데이터를 보낼 수 있음 io가 모두, socket이 특정 ->일단 io로 해봄
-                      io.emit('waitReserve', row[0]); //클라이언트에서도 이벤트이름 : waitReserve
+                  // db.query('SELECT * FROM reserve WHERE phone_num = ?', userPhoneNum, function(err, row) {//클라이언트쪽으로 넘길 자료 
+                  //   if(err) {                                                                         //이거 row에 그 번호에 따른 reserve에서 행들이 들어감
+                  //       console.log(err);
+                  //   }    
+                  //   if(row.length > 0) {
+                  //     // io.emit() 또는 socket.emit()을 사용하여 클라이언트에 데이터를 보낼 수 있음 io가 모두, socket이 특정 ->일단 io로 해봄
+                  //     io.emit('reservationUpdate', row[0]); //클라이언트에서도 이벤트이름 : waitReserve
                       
-                    }
-                  }); 
+                  //   }
+                  // })
+
+                  io.emit('reservationUpdate', clidata); //클라이언트에서도 이벤트이름 : waitReserve; 
                 }
             }); 
         
@@ -64,7 +67,20 @@ function openreserve(io) {
  
         
       });
-      socket.on('cancelReservation', (data) => {//클라이언트쪽에서 자료 넘어오면 근거로 db에서 없애고 클라이언트에 반환
+
+      socket.on('getReservationInfo', (data) => {//data에는 클라이언트에서 서버로 전송된 데이터가 들어감
+        // 예약을 처리하고 클라이언트에 응답을 보낼 수 있음  
+        db.query('SELECT * FROM reserve', function(err, row) {//세션정보에 담긴 번호를 가져옴 바로 DB에서
+          if(err) {
+              console.log(err);
+          }    
+          if(row.length > 0) {
+            io.emit('reservationUpdate', row); //클라이언트에서도 이벤트이름 : waitReserve
+          }
+        });  
+      });
+
+      socket.on('sendcancel', (data) => {//클라이언트쪽에서 자료 넘어오면 근거로 db에서 없애고 클라이언트에 반환
         db.query('SELECT data FROM sessions', function(err, row) {//세션정보에 담긴 번호를 가져옴 바로 DB에서
           if(err) {
               console.log(err);
@@ -72,7 +88,7 @@ function openreserve(io) {
           if(row.length > 0) {
             const firstdata = row[0].data;
             const jsondata = JSON.parse(firstdata);
-            const userEmail = data[5];
+            const userEmail = data[5];//관리자를 위해 email을 받음
             const studentID = jsondata.user.student_id; //일단 학번으로 본인확인하는 느낌
             const state = data[3] + '00'; //그 data[3]시간대에 대기 상태라는것을 확인
             var stinfo = [data[0], data[1], data[2], studentID, state];
@@ -83,7 +99,7 @@ function openreserve(io) {
                 }
                 else {
                   console.log("삭제 완료");
-                  if(jsondata.user.userId === "manager") { //node mailer로 구현할 예정 -> export가 맞을듯 일단 짧으면 해봄
+                  if(jsondata.user.userId === 'yonseidongari') { //node mailer로 구현할 예정 -> export가 맞을듯 일단 짧으면 해봄
                     console.log("매니저입니다"); //여기까지 완료
                     // transport 생성
                     nodemail.sendEmailmanager(userEmail, (error, info) => {
@@ -99,7 +115,7 @@ function openreserve(io) {
           }
         });
       });
-      socket.on('approveReservation', (data) => {//클라이언트쪽에서 관리자의 승인이 넘어오면 db를 갱신하고 클라이언트에 반환 -> state가 200에서 210으로 바뀌는 느낌
+      socket.on('sendapprove', (data) => {//클라이언트쪽에서 관리자의 승인이 넘어오면 db를 갱신하고 클라이언트에 반환 -> state가 200에서 210으로 바뀌는 느낌
         db.query(`UPDATE reserve SET space${data[4]} = ${data[3] + "10"} WHERE phone_num =  ${data[5]}`, function(err, row) {//세션정보에 담긴 번호를 가져옴 바로 DB에서
           if(err) {// Temp_Table 의 field1의 값이 'data2' 인 행의 field3의 값을 '변경된 값'으로 수정 해라.
             console.log(err);

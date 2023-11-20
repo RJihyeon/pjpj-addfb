@@ -36,7 +36,7 @@ function BookingPage() {
       category: selectedCategoryIndex,
     };
     socket.emit("makeReservation", reservationInfo);
-    socket.close();  
+    //socket.close();  
 
   };
 

@@ -10,12 +10,12 @@ function DropdownMenu({ onCategorySelect }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const categoryMapping = {
-    '푸른샘': '0',
-    '공연연습실': '1',
-    '다목적실b': '2',
-    '다목적실c': '3',
-    '다목적실d': '4',
-    '다목적실e': '5',
+    '푸른샘': '1',
+    '공연연습실': '2',
+    '다목적실b': '3',
+    '다목적실c': '4',
+    '다목적실d': '5',
+    '다목적실e': '6',
   };
 
   const toggleDropdown = () => {

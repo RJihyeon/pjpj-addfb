@@ -27,7 +27,7 @@ function AdminPage() {
     // Trigger the server to send reservation information
     const socket = socketIOClient("http://localhost:5000");
     socket.emit("getReservationInfo");
-    socket.close(); // Close the socket connection when you're done
+    //socket.close(); // Close the socket connection when you're done
   };
 
   const approveBookingClick = () => {
