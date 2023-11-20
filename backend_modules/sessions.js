@@ -111,7 +111,7 @@ router.post("/signup", (req, res) => {
   ];
 
   // 아이디 중복됨.
-  if (auth_functions.checkDuplicateId(info[0]), (err, isDuplicated) => {
+  auth_functions.checkDuplicateId(info[0], (err, isDuplicated) => {
     // 주의 : /checkDuplicateId 라우트에서 처리하는 함수와 반환하는 true, false가 정반대
     if (isDuplicated) {
       console.log("아이디 중복 이슈로 signup 실패");

@@ -90,26 +90,33 @@ function comparePassword(userId, userInputPassword, callback) {
 
 // 아이디 중복 확인
 function checkDuplicateId(targetId, callback) {
-    // 중복 확인 쿼리
-    const query = 'SELECT COUNT(*) AS count FROM users WHERE id = ?';
+  // 중복 확인 쿼리
+  const query = "SELECT COUNT(*) AS count FROM users WHERE id = ?";
+  // let err = null;
+  // let isDu = null;
 
-    // 매개변수 설정
-    db.query(query, [targetId], (error, results) => {
-        if (error) {
-            callback(error, null);
-        }
-        // 결과에서 개수 확인
-        const count = results[0].count;
-        console.log("count: ", count);
-        console.log(count > 0);
-    
-        // 중복 여부 확인
-        if (count > 0) {
-            callback(null, true);
-        } else {
-            callback(null, false);
-        }
-    }); 
+  // 매개변수 설정
+  db.query(query, [targetId], (error, results) => {
+    if (error) {
+      callback(error, null);
+      // console.log("ERROR in checkDuplicateId");
+      // err = error;
+    }
+    // 결과에서 개수 확인
+    const count = results[0].count;
+    console.log("count: ", count);
+    console.log(count > 0);
+
+    // 중복 여부 확인
+    if (count > 0) {
+      // isDu = true;
+      callback(null, true);
+    } else {
+      // isDu = false;
+      callback(null, false);
+    }
+  });
+  // callback(err, isDu);
 }
 
 // 회원가입 함수
@@ -149,21 +156,17 @@ function findid(username, userstudent_id, callback) {
         console.error("DB 쿼리문에서 오류:", err);
         callback(err, null);
       } else {
-        if (results.length == 1) {
-          // Authentication succeeded
-          // json data 형식 : {id: id, password: pw, phone_num: phone_num, student_id: student_id, name: name, affiliation: affiliation, division: divison} / 2023.09.26
-          const user = results[0];
-          callback(null, user);
-        } else if (results.length == 0) {
+        if (results.length == 0) {
           // Authentication failed
           console.error("일치하는 정보가 없습니다", err);
           callback(null, null);
         }
-        // Database Error
         else {
-          console.error("2개 이상의 중복된 ID, PW가 DB에 존재함:", err);
-          callback(err, null);
-        }
+          // Authentication succeeded
+          // json data 형식 : {id: id, password: pw, phone_num: phone_num, student_id: student_id, name: name, affiliation: affiliation, division: divison} / 2023.09.26
+          const user = results;
+          callback(null, user);
+        } 
       }
     }
   );
