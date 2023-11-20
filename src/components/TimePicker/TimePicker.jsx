@@ -7,12 +7,12 @@ const TimePicker = ({ onTimeSelect }) => {
   const [selectedTime, setSelectedTime] = useState(null);
 
   const timeSlotMappings = {
-    '9-12': 0,
-    '12-14': 1,
-    '14-16': 2,
-    '16-18': 3,
-    '18-20': 4,
-    '20-22': 5,
+    '9-12': '0',
+    '12-14': '1',
+    '14-16': '2',
+    '16-18': '3',
+    '18-20': '4',
+    '20-22': '5',
   };
 
   const handleSelectTime = (time) => {
