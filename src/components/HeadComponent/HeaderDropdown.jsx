@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import useDetectClose from "./useDetectClose";
+import { Link } from 'react-router-dom';
 
 const HeaderDropdown = () => {
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
@@ -19,7 +20,7 @@ const HeaderDropdown = () => {
         <Menu isDropped={myPageIsOpen}>
           <Ul>
             <Li>
-              <LinkWrapper href="http://localhost:5000/mypage">회원정보수정</LinkWrapper>
+              <Link to = "/mypage">회원정보수정</Link>
             </Li>
             <Li>
               <LinkWrapper href="/myreservpage">예약관리</LinkWrapper>
@@ -120,5 +121,6 @@ const LinkWrapper = styled.a`
   text-decoration: none;
   color: white;
 `;
+
 
 
