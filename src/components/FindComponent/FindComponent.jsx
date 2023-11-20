@@ -80,6 +80,7 @@ const FindComponent = () => {
     } catch (error) {
       // Handle error
       console.error("An error occurred:", error.response);
+      alert("오류입니다." + error.response);
     }
   };
 
@@ -105,6 +106,7 @@ const FindComponent = () => {
     } catch (error) {
       // Handle error
       console.error("An error occurred:", error.response);
+      alert("오류입니다." + error.response);
     }
   };
 

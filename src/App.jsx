@@ -20,10 +20,9 @@ import io from "socket.io-client";
 import axios from "axios";
 import { BookingProvider } from "./pages/BookingPage/BookingContext";
 
-
 function App() {
   // 로그인 상태 확인
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState();
   // 관리자 로그인 상태 확인
   const [isAdmin, setIsAdmin] = useState();
   const [socket, setSocket] = useState(null);
@@ -69,10 +68,7 @@ function App() {
     setIsAdmin(false);
   };
 
-
-
   return (
-
     <Router>
       <div className="App">
         <HeaderComponent
@@ -121,7 +117,6 @@ function App() {
         </Routes>
       </div>
     </Router>
-
   );
 }
 
