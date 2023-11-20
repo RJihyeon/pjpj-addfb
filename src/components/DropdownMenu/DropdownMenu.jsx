@@ -1,18 +1,33 @@
+// DropdownMenu.jsx
+
 import React, { useState } from 'react';
 import './DropdownMenu.css';
 
-const CATEGORIES = ['푸른샘', '공연연습실', '다목적실b','다목적실c','다목적실d','다목적실e']; // 필요한 항목들을 배열로 정의
+const CATEGORIES = ['푸른샘', '공연연습실', '다목적실b', '다목적실c', '다목적실d', '다목적실e'];
 
-function DropdownMenu() {
+function DropdownMenu({ onCategorySelect }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const categoryMapping = {
+    '푸른샘': 0,
+    '공연연습실': 1,
+    '다목적실b': 2,
+    '다목적실c': 3,
+    '다목적실d': 4,
+    '다목적실e': 5,
+  };
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   const handleCategoryClick = (category) => {
+    const index = categoryMapping[category];
     setSelectedCategory(category);
+    if (onCategorySelect && typeof onCategorySelect === 'function') {
+      onCategorySelect(index);
+    }
     toggleDropdown(); // 항목을 선택하면 드롭다운을 닫음
   };
 
