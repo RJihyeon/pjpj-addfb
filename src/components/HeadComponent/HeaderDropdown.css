@@ -1,0 +1,57 @@
+/* HeaderDropdown.css */
+
+.dropdown2 {
+  position: relative;
+  display: inline-block;
+  font-size: 14px;
+  margin-right: 0px;
+  border: none;
+  background-color: black;
+  color: white;
+}
+
+.dropdown-open {
+  color: #fff;
+  border: none;
+  padding: 10px 10px;
+  cursor: pointer;
+  background-color: #1c1c1c;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.dropdown-open:hover {
+  color: #838383;
+}
+
+.dropdown2.open .dropdown-open {
+  color: #838383;
+}
+
+.dropdown_menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #1c1c1c;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: 1000;
+}
+
+.dropdown2.open .dropdown_menu {
+  display: block;
+}
+
+.dropdown_menu li {
+  padding: 10px;
+}
+
+.dropdown_menu li:hover {
+  background-color: #f2f2f2;
+}
+
+/* Adjust the styles based on your design */

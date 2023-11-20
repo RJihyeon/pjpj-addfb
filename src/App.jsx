@@ -21,7 +21,7 @@ import axios from "axios";
 
 function App() {
   // 로그인 상태 확인
-  const [isLoggedIn, setIsLoggedIn] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   // 관리자 로그인 상태 확인
   const [isAdmin, setIsAdmin] = useState();
   const [socket, setSocket] = useState(null);
