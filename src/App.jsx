@@ -18,6 +18,8 @@ import FindPage from "./pages/FindPage";
 import SetpwPage from "./pages/SetpwPage";
 import io from "socket.io-client";
 import axios from "axios";
+import { BookingProvider } from "./pages/BookingPage/BookingContext";
+
 
 function App() {
   // 로그인 상태 확인
@@ -67,7 +69,10 @@ function App() {
     setIsAdmin(false);
   };
 
+
+
   return (
+
     <Router>
       <div className="App">
         <HeaderComponent
@@ -116,6 +121,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+
   );
 }
 
