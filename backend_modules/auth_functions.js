@@ -156,21 +156,17 @@ function findid(username, userstudent_id, callback) {
         console.error("DB 쿼리문에서 오류:", err);
         callback(err, null);
       } else {
-        if (results.length == 1) {
-          // Authentication succeeded
-          // json data 형식 : {id: id, password: pw, phone_num: phone_num, student_id: student_id, name: name, affiliation: affiliation, division: divison} / 2023.09.26
-          const user = results[0];
-          callback(null, user);
-        } else if (results.length == 0) {
+        if (results.length == 0) {
           // Authentication failed
           console.error("일치하는 정보가 없습니다", err);
           callback(null, null);
         }
-        // Database Error
         else {
-          console.error("2개 이상의 중복된 ID, PW가 DB에 존재함:", err);
-          callback(err, null);
-        }
+          // Authentication succeeded
+          // json data 형식 : {id: id, password: pw, phone_num: phone_num, student_id: student_id, name: name, affiliation: affiliation, division: divison} / 2023.09.26
+          const user = results;
+          callback(null, user);
+        } 
       }
     }
   );
