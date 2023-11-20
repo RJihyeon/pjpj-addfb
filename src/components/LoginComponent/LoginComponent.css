@@ -57,11 +57,12 @@
 /* 아이디저장하기 */
 
 .save-container {
-  width: 340px;
+  width: 360px;
   margin-top: 15px;
   color: #9b9b9b;
   font-weight: 500;
   font-size: 15px;
+  display: flex;
 }
 
 .login-click {
