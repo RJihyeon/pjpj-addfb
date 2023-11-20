@@ -89,6 +89,8 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+  text-decoration: none; /* 밑줄 제거 */
+  font-size: 14px;
 }
 
 .signup {
@@ -96,4 +98,5 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+  font-size: 14px;
 }

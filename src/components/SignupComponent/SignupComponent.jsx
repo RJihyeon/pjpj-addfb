@@ -29,14 +29,57 @@ function SignupComponent() {
   const [phone, setPhone] = useState("");
   const [affiliation, setAffiliation] = useState("");
   const [division, setDivision] = useState("");
+  const [idChecked, setIdChecked] = useState(false);
 
   //서버에 보내기
   const register = () => {
+    // 각 필드의 데이터가 비어있는지 확인
+    if (
+      !id ||
+      !pw ||
+      !pwcheck ||
+      !name ||
+      !number ||
+      !email ||
+      !phone ||
+      !affiliation ||
+      !division
+    ) {
+      alert("항목을 모두 입력해주세요.");
+      return;
+    }
+
+    // 아이디 영어 , (한국어 막기)+숫자나 특수문자는 자유
+    const idRegex = /^[A-Za-z\d!@#$%^&*()_+]+$/;
+    if (!idRegex.test(id)) {
+      alert("아이디는 영어,숫자,특수문자만으로 이뤄져야합니다.");
+      return;
+    }
+
+    // 비밀번호 영어 숫자포함 8자 이상
+    const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    if (!pwRegex.test(pw)) {
+      alert("비밀번호는 영어와 숫자를 포함하여 8자 이상으로 설정해주세요.");
+      return;
+    }
+    //비밀번호 확인이 일치하지 않으면 return
+    if (pw !== pwcheck) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
+    //아이디 중복확인 여부 확인하고 안했으면 거르기
+    if (!idChecked) {
+      alert("아이디 중복확인을 해주세요.");
+      return;
+    }
+
     //개인정보 수집 동의 안했으면 return
     if (!agreePrivacy) {
       alert("개인 정보 수집 및 이용에 동의해주세요.");
       return;
     }
+
     axios
       .post("/signup", {
         id: id,
@@ -46,6 +89,7 @@ function SignupComponent() {
         name: name,
         affiliation: affiliation,
         division: division,
+        email: email,
       })
       .then((response) => {
         // Handle success.
@@ -69,10 +113,14 @@ function SignupComponent() {
       .post("/checkDuplicateId", { id: id })
       .then((response) => {
         // 서버 응답에 따라 팝업 표시
-        if (response) {
+        if (response.data) {
+          // Use response.data instead of response
           alert("이미 존재하는 ID입니다.");
+          console.log(idChecked);
         } else {
           alert("사용 가능한 ID입니다.");
+          console.log(idChecked);
+          setIdChecked(true);
         }
       })
       .catch((error) => {
@@ -109,12 +157,13 @@ function SignupComponent() {
               type="password"
               value={pw}
               onChange={(event) => setPw(event.target.value)}
+              placeholder="영어, 숫자 포함하여 8자 이상으로 입력"
             ></Input>
           </Set>
           <Set>
             <Title>비밀번호 확인</Title>
             <Input
-              type="text"
+              type="password"
               value={pwcheck}
               onChange={(event) => setPwcheck(event.target.value)}
             ></Input>

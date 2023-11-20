@@ -1,15 +1,11 @@
+// DateTimePicker.js
+
 import React, { useState, useEffect } from 'react';
 import Flatpickr from 'react-flatpickr';
 import 'flatpickr/dist/themes/light.css';
-import './DateTimePicker.css'; 
+import './DateTimePicker.css';
 
-
-const DateTimePicker = () => {
-  const [selectedDateTime, setSelectedDateTime] = useState(new Date());
-
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
+const DateTimePicker = ({ selectedDateTime, onDateChange }) => {
   const options = {
     enableTime: false,
     altInput: true,
@@ -39,7 +35,7 @@ const DateTimePicker = () => {
   };
 
   const handleDateChange = (selectedDates) => {
-    setSelectedDateTime(selectedDates[0]);
+    onDateChange(selectedDates[0].toISOString().split('T')[0]); // Extracting the Y-m-d part
   };
 
   return (
