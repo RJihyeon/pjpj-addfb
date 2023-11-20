@@ -92,11 +92,15 @@ function comparePassword(userId, userInputPassword, callback) {
 function checkDuplicateId(targetId, callback) {
   // 중복 확인 쿼리
   const query = "SELECT COUNT(*) AS count FROM users WHERE id = ?";
+  // let err = null;
+  // let isDu = null;
 
   // 매개변수 설정
   db.query(query, [targetId], (error, results) => {
     if (error) {
       callback(error, null);
+      // console.log("ERROR in checkDuplicateId");
+      // err = error;
     }
     // 결과에서 개수 확인
     const count = results[0].count;
@@ -105,11 +109,14 @@ function checkDuplicateId(targetId, callback) {
 
     // 중복 여부 확인
     if (count > 0) {
+      // isDu = true;
       callback(null, true);
     } else {
+      // isDu = false;
       callback(null, false);
     }
   });
+  // callback(err, isDu);
 }
 
 // 회원가입 함수
