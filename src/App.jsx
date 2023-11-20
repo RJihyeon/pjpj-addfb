@@ -73,6 +73,7 @@ function App() {
         // 로그아웃 상태 업데이트
         setIsLoggedIn(false);
         setIsAdmin(false);
+    
 
         // 리다이렉션 또는 다른 작업 수행
         Navigate("/login"); // 예시: 로그아웃 후 홈페이지로 리다이렉션

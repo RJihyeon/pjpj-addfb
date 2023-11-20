@@ -113,43 +113,44 @@ router.post("/signup", (req, res) => {
   ];
 
   // 아이디 중복됨.
-  if (auth_functions.checkDuplicateId(info[0])) {
-    console.log("아이디 중복 이슈로 signup 실패");
-    res.send(false);
-  }
-
-  // 아이디 중복 X
-  else {
-  // password를 해싱한다.
-    bcrypt.genSalt(saltRounds, (err, salt) => {
-      if (err) {
-        console.error("솔트 생성 오류:", err);
-      } else {
-        bcrypt.hash(info[1], salt, (err, hash) => {
-          if (err) {
-            console.error("해싱 오류:", err);
-          }
-          // 회원가입 로직
-          else {
-            // req에서 사용자가 입력한 비밀번호를 해싱하여 info의 정보를 바꾼다.
-            info[1] = hash;
-            const query =
-              "INSERT INTO users(id, password, phone_num, student_id, name, affiliation, division, email) VALUE(?,?,?,?,?,?,?,?)";
-            auth_functions.signup(query, info, (err, results) => {
-              // 조건 : 둘다 null인 건 signup에 성공하여 유저의 정보가 DB에 전송됐음을 의미한다.
-              if (err === null && results === null) {
-                res.send(true);
-              }
-              // 왠지는 모르지만 signup 실패
-              else {
-                res.send(false);
-              }
-            });
-          }
-        });
-      }
-    });
-  }
+  if (auth_functions.checkDuplicateId(info[0]), (err, isDuplicated) => {
+    // 주의 : /checkDuplicateId 라우트에서 처리하는 함수와 반환하는 true, false가 정반대
+    if (isDuplicated) {
+      console.log("아이디 중복 이슈로 signup 실패");
+      res.send(false);
+    }
+    else {
+      // password를 해싱한다.
+      bcrypt.genSalt(saltRounds, (err, salt) => {
+        if (err) {
+          console.error("솔트 생성 오류:", err);
+        } else {
+          bcrypt.hash(info[1], salt, (err, hash) => {
+            if (err) {
+              console.error("해싱 오류:", err);
+            }
+            // 회원가입 로직
+            else {
+              // req에서 사용자가 입력한 비밀번호를 해싱하여 info의 정보를 바꾼다.
+              info[1] = hash;
+              const query =
+                "INSERT INTO users(id, password, phone_num, student_id, name, affiliation, division, email) VALUE(?,?,?,?,?,?,?,?)";
+              auth_functions.signup(query, info, (err, results) => {
+                // 조건 : 둘다 null인 건 signup에 성공하여 유저의 정보가 DB에 전송됐음을 의미한다.
+                if (err === null && results === null) {
+                  res.send(true);
+                }
+                // 왠지는 모르지만 signup 실패
+                else {
+                  res.send(false);
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  });
 });
 
 router.post("/findid", (req, res) => {
@@ -242,7 +243,7 @@ router.get("/logout", (req, res) => {
       res.status(500).send("세션 파기 오류");
     } else {
       // 로그아웃 성공
-      res.redirect("/login.html");
+      res.status(200).send(true);
     }
   });
 });
