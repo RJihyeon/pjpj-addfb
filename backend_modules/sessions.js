@@ -65,16 +65,15 @@ router.post("/login", (req, res) => {
         userName: userName,
         affiliation: affiliation,
         division: division,
-        isAdmin : isAdmin
+        isAdmin: isAdmin,
       };
       req.session.user = userData;
-      if(userId === 'yonseidongari') {
+      if (userId === "yonseidongari") {
         console.log("관리자 로그인 성공");
         isAdmin = true;
         const responseData = JSON.stringify(userData);
         res.status(200).json(responseData);
-      }
-      else {
+      } else {
         console.log("로그인 성공");
         const responseData = JSON.stringify(userData);
         res.status(200).json(responseData);
@@ -92,12 +91,11 @@ router.post("/checkDuplicateId", (req, res) => {
   auth_functions.checkDuplicateId(req.body.id, (err, isDuplicated) => {
     if (isDuplicated) {
       res.send(true);
-    }
-    else {
+    } else {
       res.send(false);
     }
-  })
-}) 
+  });
+});
 
 // 회원가입
 router.post("/signup", (req, res) => {

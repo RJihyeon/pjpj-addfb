@@ -13,7 +13,7 @@ import {
   PwSet,
 } from "./InfoComponent.style";
 
-function InfoComponent({ isLoggedIn }) {
+function InfoComponent(props) {
   // 사용자 정보를 담을 상태 정의
   const [userData, setUserData] = useState({
     id: "",
@@ -30,7 +30,7 @@ function InfoComponent({ isLoggedIn }) {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        if (!isLoggedIn) {
+        if (!props.isLoggedIn) {
           // 사용자가 로그인하지 않았으면 여기서 처리
           return;
         }
@@ -58,7 +58,7 @@ function InfoComponent({ isLoggedIn }) {
     };
 
     fetchUserData();
-  }, [isLoggedIn]); // isLoggedin이 변경될 때마다 실행
+  }, [props.isLoggedIn]); // isLoggedin이 변경될 때마다 실행
 
   // 사용자 정보를 서버에 저장하는 함수
   const saveUserData = async () => {

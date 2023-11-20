@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   Navigate,
+  useNavigate,
 } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
@@ -13,16 +14,16 @@ import "./App.css";
 import MyPage from "./pages/MyPage";
 import AdminPage from "./pages/AdminPage";
 import MyReservPage from "./pages/MyReservPage";
-import FindidPage from "./pages/FindidPage";
-import FindpwPage from "./pages/FindpwPage";
-import FindidpwPage from "./pages/FindidpwPage";
+import FindPage from "./pages/FindPage";
 import SetpwPage from "./pages/SetpwPage";
 import io from "socket.io-client";
 import axios from "axios";
+import { BookingProvider } from "./pages/BookingPage/BookingContext";
+
 
 function App() {
   // 로그인 상태 확인
-  const [isLoggedIn, setIsLoggedIn] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   // 관리자 로그인 상태 확인
   const [isAdmin, setIsAdmin] = useState();
   const [socket, setSocket] = useState(null);
@@ -62,39 +63,24 @@ function App() {
     setIsAdmin(true);
   };
 
-  const handleLogout = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/logout");
-
-      if (response.status === 200) {
-        // 로그아웃 성공 시
-        console.log("로그아웃 성공");
-
-        // 로그아웃 상태 업데이트
-        setIsLoggedIn(false);
-        setIsAdmin(false);
-    
-
-        // 리다이렉션 또는 다른 작업 수행
-        Navigate("/login"); // 예시: 로그아웃 후 홈페이지로 리다이렉션
-      } else {
-        // 로그아웃 실패 시
-        window.alert("로그아웃에 실패했습니다. 다시 시도해주세요.");
-      }
-    } catch (error) {
-      // 에러 처리
-      console.error("Error:", error);
-      window.alert("로그아웃에 실패했습니다. 서버 오류입니다.");
-    }
+  const handleLogout = () => {
+    // 로그아웃 상태 업데이트
+    setIsLoggedIn(false);
+    setIsAdmin(false);
   };
 
+
+
   return (
+
     <Router>
       <div className="App">
         <HeaderComponent
           isLoggedIn={isLoggedIn}
-          onLogout={handleLogout}
+          onLogin={() => handleLogin()}
+          onLogout={() => handleLogout()}
           isAdmin={isAdmin}
+          onLoginAdmin={() => handleAdmin()}
         />
 
         <Routes>
@@ -115,10 +101,7 @@ function App() {
             // 로그인하지 않은 경우
             <>
               <Route path="/" element={<Navigate to="/login" />} />
-              <Route path="/FindidpwPage" element={<FindidpwPage />} />
-              <Route path="/FindidPage" element={<FindidPage />} />
-              <Route path="/FindpwPage" element={<FindpwPage />} />
-              <Route path="/SetpwPage" element={<SetpwPage />} />
+              <Route path="/find" element={<FindPage />} />
 
               {/* 추가적인 로그아웃 상태에서의 라우트들 */}
             </>
@@ -138,6 +121,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+
   );
 }
 
